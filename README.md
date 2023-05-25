@@ -1,3 +1,3 @@
-# Text-to-Pay API
+# Text-To-Pay
 
-All things backend!
+Try it out -> https://text-to-pay.onrender.com/
