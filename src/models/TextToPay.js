@@ -24,47 +24,16 @@ const TextToPaySchema = new Schema(
     },
     currentStep: {
       type: String
-      // enum: Object.values(TextToPayStep)
     },
     status: {
       type: String,
       enum: Object.values(TextToPayStatus)
-    },
-    productOptions: {
-      type: [Schema.Types.ObjectId],
-      ref: "Products",
-      default: null
-    },
-    selectedProduct: {
-      type: Schema.Types.ObjectId,
-      ref: "Products",
-      default: null
     },
     quantity: {
       type: Number
     },
     selectedVariation: {
       type: VariationSchema,
-      default: null
-    },
-    discount: {
-      type: Schema.Types.ObjectId,
-      ref: "Discounts",
-      default: null
-    },
-    customer: {
-      type: Schema.Types.ObjectId,
-      ref: "Customers",
-      default: null
-    },
-    merchant: {
-      type: Schema.Types.ObjectId,
-      ref: "Merchants",
-      default: null
-    },
-    order: {
-      type: Schema.Types.ObjectId,
-      ref: "Orders",
       default: null
     }
   },
