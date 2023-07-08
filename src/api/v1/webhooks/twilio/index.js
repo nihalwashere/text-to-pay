@@ -32,8 +32,7 @@ router.post("/", async (req, res) => {
       !textToPay ||
       textToPay.flow === TextToPayFlow.DEMO ||
       String(message).includes("#demo-croissants") ||
-      String(message).includes("#demo-lululemon") ||
-      String(message).includes("#demo-express")
+      String(message).includes("#demo-lululemon")
     ) {
       return await demoFlow({ phone, message });
     }

@@ -14,8 +14,7 @@ const logger = require("../../utils/logger");
 
 const DemoType = {
   CROISSANT: "CROISSANT",
-  LULULEMON: "LULULEMON",
-  EXPRESS: "EXPRESS"
+  LULULEMON: "LULULEMON"
 };
 
 const DemoStep = {
@@ -45,30 +44,11 @@ const CroissantVariations = [
   }
 ];
 
-const ExpressVariations = [
-  {
-    id: 1,
-    name: "5 Gallon Pail",
-    price: 375
-  },
-  {
-    id: 2,
-    name: "30 Gallon Drum",
-    price: 1350
-  },
-  {
-    id: 3,
-    name: "55 Gallon Drum",
-    price: 2035
-  }
-];
-
 const demoFlow = async ({ phone, message, retryPayment = false }) => {
   try {
     if (
       String(message).includes("#demo-croissants") ||
-      String(message).includes("#demo-lululemon") ||
-      String(message).includes("#demo-express")
+      String(message).includes("#demo-lululemon")
     ) {
       let demoType = "";
 
@@ -80,15 +60,11 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
         demoType = DemoType.LULULEMON;
       }
 
-      if (String(message).includes("#demo-express")) {
-        demoType = DemoType.EXPRESS;
-      }
-
       if (!demoType) {
         return;
       }
 
-      const steps = [DemoType.CROISSANT, DemoType.EXPRESS].includes(demoType)
+      const steps = [DemoType.CROISSANT].includes(demoType)
         ? Object.values(DemoStep)
         : Object.values(DemoStep).filter(
             elem => elem !== DemoStep.SELECT_VARIATION
@@ -192,8 +168,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
 
           if (textToPay.demoType === DemoType.CROISSANT) {
             variations = CroissantVariations;
-          } else {
-            variations = ExpressVariations;
           }
 
           textToPay.selectedVariation = variations.find(
@@ -316,11 +290,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
           "That’s what we’re talking about. Let’s get into it! Imagine you receive a text from your favorite athleisure company about some pants you’ve bought!";
       }
 
-      if (textToPay.demoType === DemoType.EXPRESS) {
-        sendMessage =
-          "Cool, imagine you are Frank, who has bought a specific product, Enviro-strip, in the past but is due for a reorder.";
-      }
-
       context = ContextType.STATEMENT;
 
       status = ContextStatus.COMPLETE;
@@ -372,18 +341,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
         ];
       }
 
-      if (textToPay.demoType === DemoType.EXPRESS) {
-        sendMessage =
-          "Hey, Sam at PowderStrip. We just had an order open up on Enviro-strip, so you can get it with no lead time. Are you interested in ordering some?";
-
-        messageOptions = [
-          {
-            label: "Yes",
-            value: "yes"
-          }
-        ];
-      }
-
       context = ContextType.QUESTION;
 
       status = ContextStatus.PENDING;
@@ -400,10 +357,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
         variations = CroissantVariations;
       }
 
-      if (textToPay.demoType === DemoType.EXPRESS) {
-        variations = ExpressVariations;
-      }
-
       variations.forEach((variation, index) => {
         variationString += `${index + 1} for ${variation.name} ($${
           variation.price
@@ -417,11 +370,7 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
         });
       });
 
-      sendMessage = `${
-        textToPay.demoType === DemoType.EXPRESS
-          ? "Yes, that sounds great. Please select from the following. Respond:"
-          : "What type do you want?"
-      }\n\n${variationString}`;
+      sendMessage = `What type do you want?\n\n${variationString}`;
 
       messageOptions = variationOptions;
 
@@ -444,11 +393,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
       if (textToPay.demoType === DemoType.LULULEMON) {
         sendMessage =
           "We have that reserved for you. Please confirm your details below:\n\n$128.00 - 30% off\nMastercard 4312\n111 Light Ave.\n\nReply:\n\n'order' to place your order\n'no' to cancel";
-      }
-
-      if (textToPay.demoType === DemoType.EXPRESS) {
-        sendMessage =
-          "We have that reserved for you. Please confirm your details below:\n\nEnviro-Strip 30 Gallon Drum $1350\nCard: Visa 1234\nShipping: 123 Sales St., St. Louis, MO.\n\nReply:\n\n'order' to place your order\n'no' to cancel";
       }
 
       messageOptions = [
@@ -478,10 +422,6 @@ const demoFlow = async ({ phone, message, retryPayment = false }) => {
 
       if (textToPay.demoType === DemoType.LULULEMON) {
         sendMessage = `Confirmed! We’ll see you soon. Thank you for being a patreon of Lululemon :)`;
-      }
-
-      if (textToPay.demoType === DemoType.EXPRESS) {
-        sendMessage = `Confirmed! We’ll see you soon. Thank you so much for being a customer of ExpressChem :)`;
       }
 
       context = ContextType.STATEMENT;

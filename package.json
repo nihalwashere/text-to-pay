@@ -4,13 +4,9 @@
   "description": "All things backend!",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js", 
+    "start": "node server.js",
     "lint": "eslint --ext .js .",
     "prettier": "prettier --write './**/*.js'"
-  },
-  "engines": {
-    "node": "18.15.0",
-    "npm": "9.5.0"
   },
   "dependencies": {
     "aws-sdk": "^2.1348.0",
