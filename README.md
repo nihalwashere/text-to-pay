@@ -36,14 +36,14 @@ I have created a small dry run demo to experience what the buying experience wit
 
 You can trigger the flow by scanning either of the above two QR codes and following the steps along. The following screenshots depict the flow for buying croissants at a cafe.
 
-<img src="images/one.jpg" alt="One" />
+<img src="images/one.jpg" alt="One" height="500" />
 
-<img src="images/two.jpg" alt="Two" />
+<img src="images/two.jpg" alt="Two" height="500" />
 
-<img src="images/three.jpg" alt="Three" />
+<img src="images/three.jpg" alt="Three" height="500" />
 
-<img src="images/four.jpg" alt="Four" />
+<img src="images/four.jpg" alt="Four" height="500" />
 
-<img src="images/five.jpg" alt="Five" />
+<img src="images/five.jpg" alt="Five" height="500" />
 
-<img src="images/six.jpg" alt="Six" />
+<img src="images/six.jpg" alt="Six" height="500" />
